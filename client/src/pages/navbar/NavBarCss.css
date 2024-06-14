@@ -1,0 +1,36 @@
+.pixel-navbar {
+    padding: 10px;
+}
+
+.pixel-navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.pixel-navbar li {
+    margin: 0;
+}
+
+.pixel-navbar a {
+    text-decoration: none;
+    color: #ebe45c;
+    padding: 10px 20px;
+    display: block;
+    border: 2px solid #a4e162;
+    border-radius: 20px;
+    background-color: #16766b;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.pixel-navbar a:hover {
+    background-color: #1c90e8;
+    color: #d5c023;
+    transform: scale(1.1);
+}
+
+.pixel-navbar a:active {
+    transform: scale(1.05);
+}
