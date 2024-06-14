@@ -25,18 +25,20 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, score, email, password } = req.body;
   try {
+    const userInDb = await User.findOne({where: {id}})
+
     const user = await User.update(
       {
-        name,
-        score,
-        email,
-        password,
+    
+        score: userInDb.score + 100,
+     
       },
       { where: { id } }
     );
-    res.json(user);
+    const userResponse = await User.findByPk(id)
+
+    res.json({message:'success', userResponse});
   } catch (error) {
     res.status(418).json({ message: error.message });
   }
