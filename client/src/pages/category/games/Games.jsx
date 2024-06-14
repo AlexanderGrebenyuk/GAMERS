@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../../services/axios';
 import './GamesCss.css';
 
-function Games({user}) {
+function Games({user,setScoreUser}) {
   const [game, setGame] = useState([]);
   const [inp, setInp] = useState('');
   const [openNext, setOpenNext] = useState(false)
@@ -11,30 +11,27 @@ function Games({user}) {
   const [notTrue, setNotTrue] = useState(false)
   const [yesTrue, setYesTrue] = useState(false)
 
-  const [scoreUser, setScoreUser] = useState(0)
+  // const [scoreUser, setScoreUser] = useState(0)
 
   const { questionId } = useParams();
   const navigate = useNavigate();
 
   const axiosQuest = async () => {
     const { data } = await axiosInstance.get('/questions');
-
     if (data.message === 'success') {
       setGame(data.question);
     }
   };
 
   const axiosScore = async (id) => {
-    const { data } = await axiosInstance.update(`/users/${id}`, {
-      score:100
-    });
-    console.log('data----',data);
+    const { data } = await axiosInstance.put(`/users/${id}`);
     if (data.message === 'success') {
-      setGame(data.question);
+
+      setScoreUser(data.userResponse.score)
     }
   }
 
-
+  // console.log(scoreUser);
   useEffect(() => {
     axiosQuest();
   }, []);
@@ -42,7 +39,7 @@ function Games({user}) {
   let gamee;
 
   if (questionId) {
-    gamee = game.find((findGame) => findGame.id === +questionId);
+    gamee = game?.find((findGame) => findGame.id === +questionId);
   }
 
   const handleNextClick = () => {

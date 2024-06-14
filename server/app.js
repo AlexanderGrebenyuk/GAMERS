@@ -1,6 +1,7 @@
 const express = require('express')
 const removeHeaders = require('./middleware/removeHeaders')
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 const path = require('path')
 const app = express()
 
@@ -8,11 +9,13 @@ const PORT = 3000
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(morgan('dev'))
 app.use(removeHeaders)
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const indexRouter = require('./routes/index.routes')
+const indexRouter = require('./routes/index.routes');
+
 
 app.use('/api', indexRouter)
 

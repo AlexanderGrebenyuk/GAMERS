@@ -8,6 +8,7 @@
     padding: 0;
     display: flex;
     justify-content: space-around;
+    font-size: 20px;
 }
 
 .pixel-navbar li {
@@ -33,4 +34,8 @@
 
 .pixel-navbar a:active {
     transform: scale(1.05);
+}
+
+.asd {
+    font-style: 50px;
 }
