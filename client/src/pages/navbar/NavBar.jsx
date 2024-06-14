@@ -11,7 +11,7 @@ function Navbar({ user, scoreUser, setScoreUser,setUser }) {
     SetAccessToken('');
     navigate('/')
   }
-
+  
   return (
     <>
       {user ? (
