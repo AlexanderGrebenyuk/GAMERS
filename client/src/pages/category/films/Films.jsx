@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../../services/axios';
 import './FilmsCss.css';
-function Films() {
+function Films({user,setScoreUser}) {
   const [game, setGame] = useState([]);
   const [inp, setInp] = useState('');
   const [openNext, setOpenNext] = useState(false)
@@ -21,6 +21,13 @@ function Films() {
       setGame(data.question);
     }
   };
+  const axiosScore = async (id) => {
+    const { data } = await axiosInstance.put(`/users/${id}`);
+    if (data.message === 'success') {
+
+      setScoreUser(data.userResponse.score)
+    }
+  }
 
   useEffect(() => {
     axiosQuest();
@@ -51,6 +58,7 @@ function Films() {
       setOpenNext(true);
       setNotTrue(false)
       setYesTrue(true)
+      axiosScore(user.id)
     } else {
       setOpenNext(false);
       setNotTrue(true)

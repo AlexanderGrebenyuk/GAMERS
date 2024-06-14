@@ -23,3 +23,8 @@ h1 {
     display: flex;
     justify-content: space-around;
   }
+
+  .imege {
+    margin-top: 80px;
+    width: 400px;
+  }

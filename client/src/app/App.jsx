@@ -13,7 +13,8 @@ import Films from '../pages/category/films/Films'
 
 
 function App() {
-
+  const [scoreUser, setScoreUser] = useState(0)
+  // console.log(scoreUser);
   const location = useLocation();
   const [user, setUser] = useState(null)
 
@@ -29,12 +30,12 @@ function App() {
 
   return (
     <div>
-      {location.pathname !== '/asd' && <Navbar user={user} />}
+      {location.pathname !== '/asd' && <Navbar user={user} setUser={setUser} scoreUser={scoreUser} setScoreUser={setScoreUser}  />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/kviz" element={<Kviz user={user}/>} />
-        <Route path="/games/:questionId" element={<Games user={user}/>} />
-        <Route path="/films/:questionId" element={<Films user={user}/>} />
+        <Route path="/games/:questionId" element={<Games scoreUser={scoreUser} setScoreUser={setScoreUser} user={user}/>} />
+        <Route path="/films/:questionId" element={<Films scoreUser={scoreUser} setScoreUser={setScoreUser} user={user}/>} />
         {/* <Route path="/cards" element={<Cards />} /> */}
         <Route path="/registration" element={<Registration />} />
         <Route path="/authorization" element={<Authorization user={user} setUser={setUser}/>} />
